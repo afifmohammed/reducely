@@ -11,9 +11,10 @@ namespace reducely.tests
         {
             const string sentence = "this library is a fucking bloody pile of shit smelly code!";
             string censored;
-            using(var builder = new ReducelyContainer().For(new [] { GetType().Assembly}))
+            using(var builder = new ReducelyContainer().For(new [] { GetType().Assembly} /* a list of assemblies that contain the reduce classes */))
             {
-                censored = builder.Build<string, SwearWords>().For(sentence).By(new SwearWords());
+                var censor = builder.Build<string, SwearWords>();
+                censored = censor.For(sentence).By(new SwearWords());
             }
 
             Assert.That(censored.Replace(" ", ""), Is.EqualTo("thislibraryisapileofsmellycode!"));
