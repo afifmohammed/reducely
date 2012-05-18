@@ -13,17 +13,17 @@ namespace Reducely
         IReduceFor<TSource, TCriteria> Build<TSource, TCriteria>();
     }
 
-    public class ReducelyContainer : IDisposable, IFluentSyntax
+    public class ReducelyBuilder : IDisposable, IFluentSyntax
     {
         private readonly IKernel _kernel;
         private readonly bool _iOwnTheKernel;
 
-        public ReducelyContainer() : this(new StandardKernel())
+        public ReducelyBuilder() : this(new StandardKernel())
         {
             _iOwnTheKernel = true;
         }
 
-        public ReducelyContainer(IKernel kernel)
+        public ReducelyBuilder(IKernel kernel)
         {
             _kernel = kernel;
             _kernel.Settings.InjectNonPublic = true;
